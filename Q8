@@ -1,0 +1,13 @@
+====================================
+QUESTION-8
+====================================
+
+Display customer name and gender whose names start or end with character 'A'.
+
+
+====================================
+ANSWER
+====================================
+
+select CUS_NAME, CUS_GENDER FROM customer where
+CUS_NAME like 'A%' or CUS_NAME like '%A';
