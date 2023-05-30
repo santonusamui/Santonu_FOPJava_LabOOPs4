@@ -1,0 +1,41 @@
+====================================
+QUESTION-5
+====================================
+
+Display the Supplier details who can supply more than one product.
+
+
+====================================
+ANSWER
+====================================
+
+
+select S.*, COUNT(SP.PRO_ID) AS NO_OF_PRODUCT FROM SUPPLIER s
+INNER JOIN SUPPLIER_PRICING SP
+ON S.SUPP_ID = SP.SUPP_ID
+GROUP BY SUPP_ID
+HAVING NO_OF_PRODUCT>1;
+
+
+====================================
+ANOTHER VERSION
+====================================
+
+select * from supplier where SUPP_ID IN (
+select supp_id from supplier_pricing group by SUPP_ID
+having count(SUPP_ID) > 1);
+
+
+====================================
+ANOTHER VERSION
+====================================
+
+select S.*, SP.NO_OF_PRODUCT FROM SUPPLIER S
+INNER JOIN(
+SELECT SP.SUPP_ID, COUNT(SP.PRO_ID) AS NO_OF_PRODUCT  FROM SUPPLIER_PRICING AS SP
+group by SP.SUPP_ID
+having NO_OF_PRODUCT >1
+) AS SP
+ON SP.SUPP_ID = S.SUPP_ID;
+
+
