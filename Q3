@@ -1,0 +1,16 @@
+====================================
+QUESTION-3
+====================================
+
+Display the total number of customers based on gender who have placed individual orders of worth at least Rs.3000.
+
+====================================
+ANSWER
+====================================
+
+
+select  CUS_GENDER, count(CUS_ID) 'TOTAL_CUSTOMER' from customer 
+where CUS_ID in (
+select distinct(CUS_ID) from `order`
+ where ORD_AMOUNT>=3000 
+ ) group by CUS_GENDER;
